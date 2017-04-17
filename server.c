@@ -105,7 +105,7 @@ void create_checkpoint()
 		{
 		  TRACE0("Fehler beim Oeffnen der Datei.");
 		}
-	fwrite(users, sizeof(users),1,f);
+	fwrite(&users, sizeof(users),1,f);
 	fclose (f);
 	TRACE0("Checkpoint erstellt!");
 }
@@ -116,7 +116,7 @@ void restore_checkpoint()
   f = fopen ("userbackup", "rb");
   if (f != NULL)
     {
-      fread(users, sizeof(users), 1,f);
+      fread(&users, sizeof(users), 1,f);
       TRACE0("Checkpoint wiederhergestellt!");
       fclose(f);
     }
