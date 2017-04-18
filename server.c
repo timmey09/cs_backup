@@ -103,11 +103,11 @@ void create_checkpoint()
 	f = fopen ("userbackup", "wb");
 	if (f == NULL)
 		{
-		  TRACE0("Fehler beim Oeffnen der Datei.");
+		  TRACE0("Fehler beim Erstellen des Backups.");
 		}
 	fwrite(&users, sizeof(users),1,f);
 	fclose (f);
-	TRACE0("Checkpoint erstellt!");
+	TRACE0("Checkpoint erstellt/aktualisiert!");
 }
 
 void restore_checkpoint()
@@ -118,12 +118,12 @@ void restore_checkpoint()
     {
       fread(&users, sizeof(users), 1,f);
       TRACE0("Checkpoint wiederhergestellt!");
-      fclose(f);
     }
   else 
     {
-      TRACE0("Fehler beim Einlesen der Datei.");
+      TRACE0("Fehler beim Wiederherstellen des Backups.");
     }
+    fclose(f);
 }	
 
 void do_join(struct sockaddr_storage *from, char* message, ssize_t len)
